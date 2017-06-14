@@ -49,7 +49,7 @@ void colorDetector(Mat img)
     {
         double imgBlueAreaBuf = contourArea(contoursBlue[i]); //contours: the points of contours
 
-        if (imgBlueAreaBuf > 60){
+        if (imgBlueAreaBuf > 5){
             rectCoorBlue[jB] = boundingRect(contoursBlue[i]);
             rectCoor[jB] = rectCoorBlue[jB];
             jB++;
@@ -59,7 +59,7 @@ void colorDetector(Mat img)
     for (int i = 0; i < contoursGreen.size(); i++)  //calculate the area, center of block and robot, boundaries/rectangles of block and robot
     {
         double imgGreenAreaBuf = contourArea(contoursGreen[i]); //contours: the points of contours
-        if (imgGreenAreaBuf > 60){
+        if (imgGreenAreaBuf > 5){
 
             rectCoorGreen[jG] = boundingRect(contoursGreen[i]);
             rectCoor[jB+jG] = rectCoorGreen[jG];
@@ -105,8 +105,8 @@ void colorDetector(Mat img)
 
     for (int j = 0; j < num; j++) //calculating the value of minimum and the second minimum distance for each box
     {
-        minDistanceBox[j] = 1600;
-        min2DistanceBox[j] = 1600;
+        minDistanceBox[j] = 800;
+        min2DistanceBox[j] = 800;
         for (int x = 0; x < num; x++)
         {
             if (j != x)
@@ -292,7 +292,7 @@ int main() {
     while(!stop)
     {
         cap >> img; //read a frame image and save to the Mat img
-
+        resize(img, img, Size(200,150));
         gettimeofday(&timeStart,NULL);
         colorDetector(img);
         gettimeofday(&timeEnd,NULL);
